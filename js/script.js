@@ -58,26 +58,24 @@ $(function () {
 
 $('#submit-button').on('click', function (event) {
     event.preventDefault();
-    //お問い合わせフォーム送信ボタン押してページ遷移させない
-    console.log("送信します");
-    $.ajax({
-        url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdcruyiaCbQeuOy3saXbfIEdpFDTZ9BqQhht2-lJPRNF5uXUA/formResponse",
-        data: {
-            "entry.698546383": name,
-            "entry.2118870447": email,
-            "entry.1753307972": msg
-        },
-        type: "POST",
-        dataType: "xml",
-        statusCode: {
-            0: function () {
-                alert("送信完了しました");
-                //Success message
+    if (confirm('送信しますか？')) {
+        //    お問い合わせフォーム送信ボタン押してページ遷移させない
+        $.ajax({
+            url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdcruyiaCbQeuOy3saXbfIEdpFDTZ9BqQhht2-lJPRNF5uXUA/formResponse",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "entry.698546383": $('#name').val(),
+                "entry.2118870447": $('#email').val(),
+                "entry.1753307972": $('#msg').val()
             },
-            200: function () {
-                alert("送信に失敗しました");
-                //Success Message
-            }
-        }
-    });
+            success: function(data) {}
+        });
+//        alert("OK");
+        window.location.href = '/';
+    } else {
+        
+    };
+
+
 });
