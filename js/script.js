@@ -54,36 +54,28 @@ $(function () {
             $("#contents").css("margin-top", "0");
         }
     });
+});
 
-    $('#submit-button').on('click', function (event) {
-        event.preventDefault();
+$('#submit-button').on('click', function (event) {
+    event.preventDefault();
+    if (confirm('送信しますか？')) {
+        //    お問い合わせフォーム送信ボタン押してページ遷移させない
+        $.ajax({
+            url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdcruyiaCbQeuOy3saXbfIEdpFDTZ9BqQhht2-lJPRNF5uXUA/formResponse",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "entry.698546383": $('#name').val(),
+                "entry.2118870447": $('#email').val(),
+                "entry.1753307972": $('#msg').val()
+            },
+            success: function(data) {}
+        });
+//        alert("OK");
+        window.location.href = '/';
+    } else {
+        
+    };
 
-        var topPage = location.href;
-        if (confirm('送信しますか？')) {
-            // お問い合わせフォーム送信ボタン押してページ遷移させない
-            $.ajax({
-                url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdcruyiaCbQeuOy3saXbfIEdpFDTZ9BqQhht2-lJPRNF5uXUA/formResponse",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    "entry.698546383": $('#name').val(),
-                    "entry.2118870447": $('#email').val(),
-                    "entry.1753307972": $('#msg').val()
-                },
-                // リクエストが完了するまで実行される
-                beforeSend: function(){
-                    $('.loading').removeClass('hide');
-                }
-            }).done(function (results) {});
 
-            function sendContact() {
-                $('.loading').addClass('hide');
-                alert("送信しました。");
-                location.href = topPage + "#contact";
-                location.reload();
-            }
-
-            setTimeout(sendContact, 1000);
-        }
-    });
 });

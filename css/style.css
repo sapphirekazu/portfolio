@@ -640,21 +640,3 @@ li {
     margin-bottom: 5px;
   }
 }
-
-.hide {
-  display: none;
-}
-
-.loading {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0,0,0,.5);
-  background-image: url(../img/loading-88.gif);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center center;
-  background-size: 70px 70px;
-}
