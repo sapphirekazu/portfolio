@@ -55,6 +55,7 @@ $(function () {
         }
     });
 
+    // お問い合わせ送信ボタン
     $('#submit-button').on('click', function (event) {
         event.preventDefault();
 
@@ -71,7 +72,7 @@ $(function () {
                     "entry.1753307972": $('#msg').val()
                 },
                 // リクエストが完了するまで実行される
-                beforeSend: function(){
+                beforeSend: function () {
                     $('.loading').removeClass('hide');
                 }
             }).done(function (results) {});
@@ -79,11 +80,20 @@ $(function () {
             function sendContact() {
                 $('.loading').addClass('hide');
                 alert("送信しました。");
-                location.href = topPage + "#contact";
+                location.href = topPage;
                 location.reload();
             }
 
             setTimeout(sendContact, 1000);
         }
+    });
+
+    var backToTop = $('#backToTop');
+    $('#backToTop').on('click', function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 300);
+        return false
+        e;
     });
 });
